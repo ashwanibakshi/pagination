@@ -1,0 +1,92 @@
+<%-include('../partial/header')-%>
+<div class=" container">
+    <center>
+    <div class="card" style="width: fit-content;">
+        <div class="card-body">
+         <form action="/" method="POST">
+                <div class="row">
+                  <div class="form-group col-md-12">
+                    <input type="text" class="form-control" name="name" placeholder="enter name" required>
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12"">
+                        <input type="text" class="form-control" name="phno" placeholder="enter phno" required>
+                      </div>
+                </div>
+                <button type="submit">Submit</button>
+              </form> 
+        </div>
+      </div>
+    </center>
+    <br>
+    <%if(data.length>0){%>
+        <center>
+        <div style="width:auto; border-style: solid;border-color: black;">
+        <table class="table table-border table-hover">
+            <thead class="bg-warning">
+                <tr>
+                    <th>
+                        s.no
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                       Phno
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <%for(var i=0;i< data.length;i++){%>
+                <tr>
+                    <td>
+                        <%=i+1%>
+                    </td>
+                    <td>
+                     <%=data[i].name%>
+                    </td>
+                    <td>
+                      <%=data[i].phno%>
+                    </td>
+                </tr>
+                <%}%>
+            </tbody>
+        </table>
+        <div class="text-center">
+          <% if (pages > 0) { %>
+          <ul class="pagination">
+            <% if (current == 1) { %>
+              <li class="page-item disabled"><a class="page-link">First</a></li>
+          <% } else { %>
+              <li><a class="page-link" href="/?page=1">First</a></li>
+          <% } %>
+          <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+          <% if (i !== 1) { %>
+              <li class="page-item disabled"><a>...</a></li>
+          <% } %>
+          <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+              <% if (i == current) { %>
+                  <li class="page-item active"><a class="page-link"><%= i %></a></li>
+              <% } else { %>
+                  <li><a class="page-link" href="/?page=<%= i %>"><%= i %></a></li>
+              <% } %>
+              <% if (i == Number(current) + 4 && i < pages) { %>
+                  <li class="page-item disabled"><a class="page-link">...</a></li>
+              <% } %>
+          <% } %>
+          <% if (current == pages) { %>
+              <li class="page-item disabled"><a class="page-link">Last</a></li>
+          <% } else { %>
+              <li><a class="page-link" href="/?page=<%= pages %>">Last</a></li>
+          <% } %>
+          </ul>
+          <% } %>
+        </div>  
+    </div>
+    </center>
+    <%}%>
+         
+    </div>
+
+<%-include('../partial/footer')-%>
